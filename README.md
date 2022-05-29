@@ -12,7 +12,7 @@
 <img width="231" alt="Screen Shot 2022-05-29 at 17 45 49" src="https://user-images.githubusercontent.com/88303669/170864060-41859247-56ce-4ed9-aa37-5db3fd46a1ee.png">
 </p>
 
-  Berdasarkan data pada tabel diatas, diketahui kadar saturasi oksigen dari responden ke-3 ketika belum melakukan aktivitas 𝐴 sebanyak 67, dan setelah melakukan aktivitas 𝐴 sebanyak 70.
+Berdasarkan data pada tabel diatas, diketahui kadar saturasi oksigen dari responden ke-3 ketika belum melakukan aktivitas 𝐴 sebanyak 67, dan setelah melakukan aktivitas 𝐴 sebanyak 70.
 
 1. A. Carilah Standar Deviasi dari data selisih pasangan pengamatan tabel diatas.
 
@@ -102,4 +102,56 @@ H1 : μ > 20000
 
 ![image-3](https://user-images.githubusercontent.com/88303669/170866279-23422b87-1105-4bf3-93ce-18666912da9d.png)
 
-Kesimpulannya adalah bahwa mobil dikemudikan rata-rata lebih dari 20.000 km/tahun
+Kesimpulannya adalah bahwa mobil dikemudikan rata-rata lebih dari 20.000 km/tahun.
+
+3. Diketahui perusahaan memiliki seorang data analyst ingin memecahkan permasalahan pengambilan keputusan dalam perusahaan tersebut. Selanjutnya didapatkanlah data berikut dari perusahaan saham tersebut. 
+
+<p align="center">
+<img width="476" alt="Screen Shot 2022-05-29 at 18 58 07" src="https://user-images.githubusercontent.com/88303669/170866866-87a41cee-4868-4e6e-a187-949d770aca24.png">
+</p>
+
+3. A.
+
+Dari data diatas berilah keputusan serta kesimpulan yang didapatkan dari hasil diatas. Asumsikan nilai variancenya sama, apakah ada perbedaan pada rata-ratanya (α= 0.05)? Buatlah :
+
+Perhitungan H0.
+
+![170837176-254c2846-c1b7-47c0-aa9f-c3b2e5db149a-2](https://user-images.githubusercontent.com/88303669/170867133-003cba38-d7c1-4d07-8f02-519ad3076f11.png)
+
+Perhitungan H1.
+
+![170837297-542b8a9e-309b-41be-92c5-880e284beef4](https://user-images.githubusercontent.com/88303669/170867137-acb52e0d-2cdd-4c87-8a4c-a5127ee58793.png)
+
+3. B. 
+Hitung sampel statistik.
+```
+tsum.test(mean.x=3.64, s.x = 1.67, n.x = 19, mean.y =2.79 , s.y = 1.32, n.y = 27, alternative = "greater", var.equal = TRUE)
+```
+<img width="497" alt="Screen Shot 2022-05-29 at 19 13 48" src="https://user-images.githubusercontent.com/88303669/170867565-14170ffb-4f98-4e50-a663-82b7bfcf3800.png">
+
+3. C. 
+Lakukan Uji Statistik (df =2)
+```
+install.packages("mosaic")
+library(mosaic)
+plotDist(dist='t', df=2, col="blue")
+```
+![170845594-721682ce-705c-4423-b6e2-5d3ad48e10cf](https://user-images.githubusercontent.com/88303669/170868008-1a0bb077-693e-463b-9ebd-e27f2629724f.png)
+
+3. D.
+
+Nilai kritikal Adapun untuk mendapatkan nilai kritikal bisa menggunakan qchisq dengan df=2 sesuai soal sebelumnya.
+```
+qchisq(p = 0.05, df = 2, lower.tail=FALSE)
+```
+<img width="337" alt="Screen Shot 2022-05-29 at 19 34 17" src="https://user-images.githubusercontent.com/88303669/170868603-7d0f06ee-6bf0-47f1-8b54-d5db306bc948.png">
+
+3. E.
+
+Keputusan
+
+Teori keputusan adalah teori formal pengambilan keputusan di bawah ketidakpastian. Aksinya adalah : ({a}_{a∈A}) Kemungkinan konsekuensi : ({c}_{c∈C}) (tergantung pada keadaan dan tindakan) Maka keputusan dapat dibuat dengan t.test
+
+3. F.
+
+Kesimpulan yang didapatkan yaitu perbedaan rata-rata yang terjadi tidak ada jika dilihat dari uji statistik dan akan ada tetapi tidak signifikan jika dipengaruhi nilai kritikal.
