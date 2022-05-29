@@ -135,8 +135,9 @@ install.packages("mosaic")
 library(mosaic)
 plotDist(dist='t', df=2, col="blue")
 ```
+<p align="center">
 ![170845594-721682ce-705c-4423-b6e2-5d3ad48e10cf](https://user-images.githubusercontent.com/88303669/170868008-1a0bb077-693e-463b-9ebd-e27f2629724f.png)
-
+</p>
 3. D. Nilai kritikal.
 
 Adapun untuk mendapatkan nilai kritikal bisa menggunakan qchisq dengan df=2 sesuai soal sebelumnya.
@@ -197,15 +198,15 @@ Hasilnya :
 
 Setelah di jalankan maka nilai p-value = 0.8054. Kesimpulan yang didapatkan yaitu Bartlett's K-squared memiliki nilai sebesar 0.43292 dan df bernilai 2.
 
-4. C.Untuk uji ANOVA (satu arah), buatlah model linier dengan Panjang versus Grup dan beri nama model tersebut model 1.
+4. C. Untuk uji ANOVA (satu arah), buatlah model linier dengan Panjang versus Grup dan beri nama model tersebut model 1.
 ```
 qqnorm(group1$Length)
 qqline(group1$Length)
 ```
 Hasilnya :
-
+<p align="center">
 ![170848819-3b70668f-ba55-4d57-b297-a14cb7d7218a](https://user-images.githubusercontent.com/88303669/170871951-79b46316-ff3c-411a-adc4-75fca7108d0e.png)
-
+</p>
 4. D. Dari Hasil Poin C, Berapakah nilai-p ? , Apa yang dapat Anda simpulkan
 dari H0?
 
