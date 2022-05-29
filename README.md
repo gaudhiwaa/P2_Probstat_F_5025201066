@@ -235,3 +235,6 @@ Hasilnya :
 
 library(ggplot2)
 ggplot(dataoneway, aes(x = Group, y = Length)) + geom_boxplot(fill = "grey80", colour = "black") + scale_x_discrete() + xlab("Treatment Group") +  ylab("Length (cm)")
+
+<img width="1210" alt="170870866-4728bf66-3c96-4618-b24e-1c0fbcfa18df" src="https://user-images.githubusercontent.com/88303669/170873695-45444bde-465c-48c4-a000-346176b0cfa6.png">
+
