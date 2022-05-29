@@ -152,3 +152,86 @@ Teori keputusan adalah teori formal pengambilan keputusan di bawah ketidakpastia
 3. F. Kesimpulan.
 
 Kesimpulan yang didapatkan yaitu perbedaan rata-rata yang terjadi tidak ada jika dilihat dari uji statistik dan akan ada tetapi tidak signifikan jika dipengaruhi nilai kritikal.
+
+4 Seorang Peneliti sedang meneliti spesies dari kucing di ITS . Dalam penelitiannya ia mengumpulkan data tiga spesies kucing yaitu kucing oren, kucing hitam dan kucing putih dengan panjangnya masing-masing. Jika : diketahui dataset https://intip.in/datasetprobstat1 H0 : Tidak ada perbedaan panjang antara ketiga spesies atau rata-rata panjangnya sama. Maka Kerjakan atau Carilah:
+
+4. A. Buatlah masing masing jenis spesies menjadi 3 subjek "Grup" (grup 1,grup 2,grup 3). Lalu Gambarkan plot kuantil normal untuk setiap kelompok dan lihat apakah ada outlier utama dalam homogenitas varians. 
+
+Langkah pertama mengambil data dari link yang telah disediakan.
+
+```
+myFile  <- read.table(url("https://rstatisticsandresearch.weebly.com/uploads/1/0/2/6/1026585/onewayanova.txt")) 
+dim(myFile)
+head(myFile)
+```
+Selanjutnya membuat myFile menjadi group.
+
+```
+myFile$Group <- as.factor(myFile$Group)
+myFile$Group = factor(myFile$Group,labels = c("Kucing Oren","Kucing Hitam","Kucing Putih"))
+```
+Setelah itu, dicek apakah dia menyimpan nilai di groupnya.
+```
+class(myFile$Group)
+```
+Lalu bagi tiap value menjadi 3 bagian ke 3 grup
+```
+group1 <- subset(myFile, Group=="Kucing Oren")
+group2 <- subset(myFile, Group=="Kucing Hitam")
+group3 <- subset(myFile, Group=="Kucing Putih")
+```
+
+<img width="753" alt="Screen Shot 2022-05-29 at 21 04 02" src="https://user-images.githubusercontent.com/88303669/170873137-7cc643ed-dfce-4a10-932b-f24af583cc2b.png">
+
+4. B. Carilah atau periksalah Homogeneity of variances-nya, Berapa nilai p yang didapatkan? , Apa hipotesis dan kesimpulan yang dapat diambil ?
+
+Mencari Homogeneity of variances bisa menggunakan command sebagai berikut.
+
+```
+bartlett.test(Length~Group, data=dataoneway)
+```
+
+Hasilnya :
+
+<img width="608" alt="170871015-41c0838b-197e-4cf9-ad70-4b9fecdb8414" src="https://user-images.githubusercontent.com/88303669/170873283-00db153c-c1b7-4be2-871b-fed7dfe6f5d3.png">
+
+Setelah di jalankan maka nilai p-value = 0.8054. Kesimpulan yang didapatkan yaitu Bartlett's K-squared memiliki nilai sebesar 0.43292 dan df bernilai 2.
+
+4. C.Untuk uji ANOVA (satu arah), buatlah model linier dengan Panjang versus Grup dan beri nama model tersebut model 1.
+```
+qqnorm(group1$Length)
+qqline(group1$Length)
+```
+Hasilnya :
+
+![170848819-3b70668f-ba55-4d57-b297-a14cb7d7218a](https://user-images.githubusercontent.com/88303669/170871951-79b46316-ff3c-411a-adc4-75fca7108d0e.png)
+
+4. D. Dari Hasil Poin C, Berapakah nilai-p ? , Apa yang dapat Anda simpulkan
+dari H0?
+
+Didapatkan p-value yaitu = 0.8054. Maka dapat disimpulkan bahwa H0 ditolak.
+
+4. E. Verifikasilah jawaban model 1 dengan Post-hoc test Tukey HSD, dari nilai p
+yang didapatkan apakah satu jenis kucing lebih panjang dari yang lain? Jelaskan.
+
+Langkah pertama adalah menggunakan command ANOVA.
+
+```
+model1 <- lm(Length~Group, data=myFile)
+```
+Selanjutnya menggunakan command.
+```
+anova(model1)
+```
+Lalu menggunakan model Post-hoc Tukey HSD sebagai berikut
+```
+TukeyHSD(aov(model1))
+```
+Hasilnya :
+
+<img width="615" alt="170871161-3a9a1a94-1302-4eed-a7ca-9bfe3c4eee24-2" src="https://user-images.githubusercontent.com/88303669/170873365-6afaf0cb-34b0-48ae-82f3-c79b0efe7682.png">
+
+4. F. Visualisasikan data dengan ggplot2.
+
+library(ggplot2)
+ggplot(dataoneway, aes(x = Group, y = Length)) + geom_boxplot(fill = "grey80", colour = "black") + scale_x_discrete() + xlab("Treatment Group") +  ylab("Length (cm)")
