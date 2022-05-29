@@ -135,9 +135,9 @@ install.packages("mosaic")
 library(mosaic)
 plotDist(dist='t', df=2, col="blue")
 ```
-<p align="center">
+
 ![170845594-721682ce-705c-4423-b6e2-5d3ad48e10cf](https://user-images.githubusercontent.com/88303669/170868008-1a0bb077-693e-463b-9ebd-e27f2629724f.png)
-</p>
+
 3. D. Nilai kritikal.
 
 Adapun untuk mendapatkan nilai kritikal bisa menggunakan qchisq dengan df=2 sesuai soal sebelumnya.
@@ -204,9 +204,9 @@ qqnorm(group1$Length)
 qqline(group1$Length)
 ```
 Hasilnya :
-<p align="center">
+
 ![170848819-3b70668f-ba55-4d57-b297-a14cb7d7218a](https://user-images.githubusercontent.com/88303669/170871951-79b46316-ff3c-411a-adc4-75fca7108d0e.png)
-</p>
+
 4. D. Dari Hasil Poin C, Berapakah nilai-p ? , Apa yang dapat Anda simpulkan
 dari H0?
 
@@ -239,3 +239,96 @@ ggplot(dataoneway, aes(x = Group, y = Length)) + geom_boxplot(fill = "grey80", c
 
 <img width="1210" alt="170870866-4728bf66-3c96-4618-b24e-1c0fbcfa18df" src="https://user-images.githubusercontent.com/88303669/170873695-45444bde-465c-48c4-a000-346176b0cfa6.png">
 
+5. Data yang digunakan merupakan hasil eksperimen yang dilakukan untuk mengetahui pengaruh suhu operasi (100˚C, 125˚C dan 150˚C) dan tiga jenis kaca pelat muka (A, B dan C) pada keluaran cahaya tabung osiloskop. Percobaan dilakukan sebanyak 27 kali dan didapat data sebagai berikut: Data Hasil Eksperimen. Dengan data tersebut :
+
+
+5.A. Buatlah plot sederhana untuk visualisasi data.
+
+Run semua library yang diperlukan.
+
+```
+install.packages("multcompView")
+library(readr)
+library(ggplot2)
+library(multcompView)
+library(dplyr)
+```
+
+Selanjutnya membaca file GTL.csv dari documents.
+```
+GTL <- read_csv("GTL.csv")
+head(GTL)
+```
+![image](https://user-images.githubusercontent.com/70510279/170851339-6020c531-8d07-4a20-a9ab-4db04a1110e0.png)
+
+Lakukan observasi pada data.
+```
+str(GTL)
+```
+![image](https://user-images.githubusercontent.com/70510279/170851373-4512e70e-81ed-4a12-bf5e-5408d4403678.png)
+
+Selanjutnya lakukan viasualisasi menggunakan simple plot yaitu sebagai berikut
+```
+qplot(x = Temp, y = Light, geom = "point", data = GTL) +
+  facet_grid(.~Glass, labeller = label_both)
+```
+![image](https://user-images.githubusercontent.com/70510279/170851403-3b91fe4f-ab41-4b3e-8aca-066a27607971.png)
+
+5. B.
+Lakukan uji ANOVA dua arah.
+Langkah pertama adalah membuat variabel as factor sebagai ANOVA.
+```
+GTL$Glass <- as.factor(GTL$Glass)
+GTL$Temp_Factor <- as.factor(GTL$Temp)
+str(GTL)
+```
+![image](https://user-images.githubusercontent.com/70510279/170851438-509ae870-a9a1-420e-adb9-3239f6a6dfb6.png)
+
+Selanjutnya melakukan analisis of variance (aov) yaitu sebagai berikut.
+```
+anova <- aov(Light ~ Glass*Temp_Factor, data = GTL)
+summary(anova)
+```
+![image](https://user-images.githubusercontent.com/70510279/170851507-b318c577-8c71-4a3c-b391-1c406e364abb.png)
+
+5. C.
+Tampilkan tabel dengan mean dan standar deviasi keluaran cahaya untuk setiap perlakuan (kombinasi kaca pelat muka dan suhu operasi).
+
+Menggunakan `group_by` lalu melakukan `summarise` sesuai mean dan standar deviasi yang berlaku sehingga scriptnya adalah sebagai berikut.
+```
+data_summary <- group_by(GTL, Glass, Temp) %>%
+  summarise(mean=mean(Light), sd=sd(Light)) %>%
+  arrange(desc(mean))
+print(data_summary)
+```
+![image](https://user-images.githubusercontent.com/70510279/170851578-fee77749-6fff-4abf-ad36-62ef2ec84c3d.png)
+
+5. D.
+Lakukan uji Tukey.
+
+Menggunakan fungsi `TukeyHSD` sebagai berikut.
+```
+tukey <- TukeyHSD(anova)
+print(tukey)
+```
+![image](https://user-images.githubusercontent.com/70510279/170851658-f097be04-5017-404e-99b6-0ebdebb284d9.png)
+![image](https://user-images.githubusercontent.com/70510279/170851669-260742aa-75b0-47e2-9d8a-dabf318b5082.png)
+
+5. E.
+Gunakan compact letter display untuk menunjukkan perbedaan signifikan antara uji Anova dan uji Tukey.
+
+Awalnya yaitu membuat compact letter display sebagai berikut.
+```
+tukey.cld <- multcompLetters4(anova, tukey)
+print(tukey.cld)
+```
+![image](https://user-images.githubusercontent.com/70510279/170851727-729875df-5aaf-4897-b97f-08b91127347e.png)
+
+Tambahkan compact letter display tersebut ke tabel dengan means(rata-rata) dan sd.
+
+```
+cld <- as.data.frame.list(tukey.cld$`Glass:Temp_Factor`)
+data_summary$Tukey <- cld$Letters
+print(data_summary)
+```
+![image](https://user-images.githubusercontent.com/70510279/170851749-d1e4fd97-1020-4f52-bb1a-7d020a508093.png)
