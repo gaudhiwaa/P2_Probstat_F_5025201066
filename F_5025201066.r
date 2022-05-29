@@ -28,4 +28,14 @@ var.test(beforeResearch, afterResearch)
 # Untuk melihat pengaruh jika tingkat signifikasi 5% dan tidak ada pengaruh yang signifikan secara statistik
 t.test(beforeResearch, afterResearch, var.equal = TRUE)
 
+# 2
+# 2. A.
+# README
 
+# 2. B
+install.packages("BSDA")
+library(BSDA)
+tsum.test(mean.x=23500, sd(3900), n.x=100)
+
+# 2. C
+# README
