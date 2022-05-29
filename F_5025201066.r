@@ -32,7 +32,8 @@ t.test(beforeResearch, afterResearch, var.equal = TRUE)
 # 2. A.
 # README
 
-# 2. B
+# 2. B. 
+# Penjelasan output yang dihasilkan
 install.packages("BSDA")
 library(BSDA)
 tsum.test(mean.x=23500, sd(3900), n.x=100)
