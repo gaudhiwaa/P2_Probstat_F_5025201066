@@ -69,3 +69,37 @@ t.test(beforeResearch, afterResearch, var.equal = TRUE)
 
 
 Mean dan convidence sama dengan nomor 1.B, yang berbeda adalah p-value dan df. Sehingga tidak memiliki pengaruh yang signifikan secara statistik.
+
+2. Diketahui bahwa mobil dikemudikan rata-rata lebih dari 20.000 kilometer per tahun. Untuk menguji klaim ini, 100 pemilik mobil yang dipilih secara acak diminta untuk mencatat jarak yang mereka tempuh. Jika sampel acak menunjukkan rata-rata 23.500 kilometer dan standar deviasi 3900 kilometer. (Kerjakan menggunakan 2 library seperti referensi pada modul).
+
+2. A Apakah Anda setuju dengan klaim tersebut?
+
+Setuju
+
+2. B. Jelaskan maksud dari output yang dihasilkan!
+```
+install.packages("BSDA")
+library(BSDA)
+tsum.test(mean.x=23500, sd(3900), n.x=100)
+```
+
+<img width="383" alt="Screen Shot 2022-05-29 at 18 36 17" src="https://user-images.githubusercontent.com/88303669/170865907-14066b8d-1d3c-42b2-8008-fff24968c1c8.png">
+
+Diketahui n = 100, Rata-Rata (X̄) = 23500, dan standar deviasi(σ) = 3900 Maka null hipotesis adalah :
+```
+H0 : μ = 20000
+```
+Alternatif hipotesisnya adalah :
+```
+H1 : μ > 20000
+```
+
+2. C. Buatlah kesimpulan berdasarkan P-Value yang dihasilkan!
+
+![image](https://user-images.githubusercontent.com/88303669/170866285-c1a6a898-e066-40e9-9e61-64d9d34d336a.png)
+
+![image-2](https://user-images.githubusercontent.com/88303669/170866284-cbb402ed-f957-4b25-ac3a-8ef25538dafe.png)
+
+![image-3](https://user-images.githubusercontent.com/88303669/170866279-23422b87-1105-4bf3-93ce-18666912da9d.png)
+
+Kesimpulannya adalah bahwa mobil dikemudikan rata-rata lebih dari 20.000 km/tahun
