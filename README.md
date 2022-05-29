@@ -72,7 +72,7 @@ Mean dan convidence sama dengan nomor 1.B, yang berbeda adalah p-value dan df. S
 
 2. Diketahui bahwa mobil dikemudikan rata-rata lebih dari 20.000 kilometer per tahun. Untuk menguji klaim ini, 100 pemilik mobil yang dipilih secara acak diminta untuk mencatat jarak yang mereka tempuh. Jika sampel acak menunjukkan rata-rata 23.500 kilometer dan standar deviasi 3900 kilometer. (Kerjakan menggunakan 2 library seperti referensi pada modul).
 
-2. A Apakah Anda setuju dengan klaim tersebut?
+2.A. Apakah Anda setuju dengan klaim tersebut?
 
 Setuju
 
